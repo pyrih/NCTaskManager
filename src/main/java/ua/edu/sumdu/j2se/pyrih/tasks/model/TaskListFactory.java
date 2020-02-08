@@ -1,8 +1,13 @@
 package ua.edu.sumdu.j2se.pyrih.tasks.model;
 
+/**
+ * A class creates an ArrayTaskList and LinkedTaskList object,
+ * depending on the parameter passed to it.
+ */
 public class TaskListFactory {
+
     /**
-     * Method that creates an ArrayTaskList and LinkedTaskList object
+     * Creates an ArrayTaskList and LinkedTaskList object
      * depending on the parameter passed to it.
      * It based on the design pattern: Abstract factory.
      *

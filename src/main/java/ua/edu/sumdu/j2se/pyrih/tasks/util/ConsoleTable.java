@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class helps to create a table in java command
+ * line application using System.out.printf method.
+ */
 public class ConsoleTable {
     private static final String HORIZONTAL_SEP = "-";
     private String verticalSep;
@@ -13,27 +17,54 @@ public class ConsoleTable {
     private List<String[]> rows = new ArrayList<>();
     private boolean rightAlign;
 
+    /**
+     * Class constructor.
+     */
     public ConsoleTable() {
         setShowVerticalLines(false);
     }
 
+    /**
+     * Aligns text on right side in a cell.
+     *
+     * @param rightAlign if true then cell text is right aligned.
+     */
     public void setRightAlign(boolean rightAlign) {
         this.rightAlign = rightAlign;
     }
 
+    /**
+     * Shows vertical lines in a table.
+     *
+     * @param showVerticalLines if false (default) then no vertical lines are shown.
+     */
     public void setShowVerticalLines(boolean showVerticalLines) {
         verticalSep = showVerticalLines ? "|" : "";
         joinSep = showVerticalLines ? "+" : " ";
     }
 
+    /**
+     * Sets headers to a console table.
+     * Optional - if not used then there will be no header and horizontal lines.
+     *
+     * @param headers array of strings to set headers.
+     */
     public void setHeaders(String... headers) {
         this.headers = headers;
     }
 
+    /**
+     * Adds a row to a table.
+     *
+     * @param cells array of string cells.
+     */
     public void addRow(String... cells) {
         rows.add(cells);
     }
 
+    /**
+     * Prints a table into console.
+     */
     public void print() {
         int[] maxWidths = headers != null ?
                 Arrays.stream(headers).mapToInt(String::length).toArray() : null;
