@@ -293,6 +293,16 @@ public class ConsoleView implements View {
         println(builder.toString());
     }
 
+    /**
+     * Checks user confirmation from command line input.
+     *
+     * @return true if user answer is "yes".
+     */
+    @Override
+    public boolean checkUserAnswer() {
+        return userAnswer().equalsIgnoreCase("yes");
+    }
+
     private void emptyList() {
         print("The task list is empty! Please create at least one task.\n");
     }
@@ -318,10 +328,6 @@ public class ConsoleView implements View {
             }
         }
         st.print();
-    }
-
-    private boolean checkUserAnswer() {
-        return userAnswer().equalsIgnoreCase("yes");
     }
 
     private String userAnswer() {

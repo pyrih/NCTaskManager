@@ -109,5 +109,10 @@ public interface View {
      */
     void displayTaskInfo(Task task);
 
-
+    /**
+     * Checks user confirmation from representation.
+     *
+     * @return true if user confirmed request.
+     */
+    boolean checkUserAnswer();
 }
