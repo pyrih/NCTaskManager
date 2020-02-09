@@ -86,9 +86,7 @@ public class Controller {
      */
     public void addTask() {
         Task task;
-
         String title = view.getTitle();
-        boolean active = view.getActiveStatus();
         int repeated = view.getIsTaskRepeated();
         if (repeated == 2) {
             while (true) {
@@ -102,7 +100,7 @@ public class Controller {
                 if (!((start.isAfter(end) || start.isEqual(end)) &&
                         start.plusSeconds(interval).isAfter(end))) {
                     task = new Task(title, start, end, interval);
-                    task.setActive(active);
+                    task.setActive(true);
                     model.add(task);
                     view.displayTaskInfo(task);
                     view.print("The task was successfully added to the list.");
@@ -115,7 +113,7 @@ public class Controller {
             view.print("\nTask completion time: ");
             LocalDateTime time = view.parseDateTime();
             task = new Task(title, time);
-            task.setActive(active);
+            task.setActive(true);
             model.add(task);
             view.displayTaskInfo(task);
             view.print("The task was successfully added to the list.");
@@ -156,7 +154,7 @@ public class Controller {
                     case 2:
                         boolean aBoolean = view.getActiveStatus();
                         task.setActive(aBoolean);
-                        view.print(" Activity status was changed on: " + task.isActive());
+                        view.print("Activity status was changed on: " + task.isActive());
                         break;
                     case 3:
                         task.setTime(view.parseDateTime());
