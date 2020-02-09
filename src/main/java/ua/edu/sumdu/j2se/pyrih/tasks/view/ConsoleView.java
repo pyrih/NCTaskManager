@@ -351,7 +351,7 @@ public class ConsoleView implements View {
                     return n;
                 }
             } catch (NumberFormatException e) {
-                logger.error("");
+                logger.error("Incorrect input value.");
             }
             System.out.print("Please, enter correct value or [quite] to cancel: ");
         }

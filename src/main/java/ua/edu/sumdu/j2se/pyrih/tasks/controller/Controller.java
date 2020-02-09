@@ -119,11 +119,12 @@ public class Controller {
             model.add(task);
             view.displayTaskInfo(task);
             view.print("The task was successfully added to the list.");
+            logger.info("The task: " + task.getTitle() + " was successfully added to the list.");
         }
     }
 
     /**
-     * Edits selected task from task list.
+     * Edits selected task from task lit.
      */
     public void editTask() {
         int index = view.selectTask(model) - 1;
@@ -186,8 +187,8 @@ public class Controller {
                 }
             }
         }
-
         view.println("The task has been successfully changed!");
+        logger.info("The task: " + task.getTitle() + "has been successfully changed!");
     }
 
     /**
@@ -205,6 +206,7 @@ public class Controller {
             task = model.getTask(taskID - 1);
             model.remove(task);
             view.print("Task №: " + taskID + " was deleted from controller!");
+            logger.info("Task №: " + taskID + " was deleted from controller!");
         }
     }
 

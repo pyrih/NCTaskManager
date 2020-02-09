@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.SortedMap;
 
 public class NotificationManager extends Thread {
-    private static final Logger logger = Logger.getLogger(MailNotification.class);
+    private static final Logger logger = Logger.getLogger(NotificationManager.class);
     private final static long TIMER = 300000; // 5 MIN
     private AbstractTaskList list;
     private Notification notification;
