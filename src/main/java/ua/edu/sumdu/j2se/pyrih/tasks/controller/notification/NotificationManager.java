@@ -13,11 +13,16 @@ public class NotificationManager extends Thread {
     private static final Logger logger = Logger.getLogger(MailNotification.class);
     private final static long TIMER = 300000; // 5 MIN
     private AbstractTaskList list;
+    private Notification notification;
 
     public NotificationManager(AbstractTaskList list) {
         this.list = list;
+        notification = new MailNotification();
     }
 
+    /**
+     *
+     */
     @Override
     public void run() {
         SortedMap<LocalDateTime, Set<Task>> map;
@@ -26,7 +31,6 @@ public class NotificationManager extends Thread {
             if (map.isEmpty()) {
                 logger.info("Map is empty! Calendar has no tasks for the next period.");
             } else {
-                Notification notification = new MailNotification();
                 notification.send(map);
             }
             try {
