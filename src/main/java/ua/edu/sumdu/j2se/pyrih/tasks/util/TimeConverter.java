@@ -1,6 +1,21 @@
 package ua.edu.sumdu.j2se.pyrih.tasks.util;
 
+/**
+ * Class converts seconds value into days, hours, minutes and seconds.
+ */
 public class TimeConverter {
+
+    /**
+     * Returns time interval (days, hours, minutes and seconds) as a string.
+     * If one of the values ​​0 it is not displayed in the console.
+     * <p>
+     * Examples:
+     * Input : 369121517
+     * Output : 4272 days 5 hours 45 minutes 17 seconds
+     *
+     * @param n an integer value in seconds.
+     * @return string value.
+     */
     public static String convertSecondsToDay(int n) {
         StringBuilder b = new StringBuilder();
 

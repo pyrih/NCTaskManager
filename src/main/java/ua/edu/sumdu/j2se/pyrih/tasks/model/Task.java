@@ -6,6 +6,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * A class describes a task.
+ * The tasks have some text that describes the details of the task.
+ * Tasks can be active and inactive. Tasks can be scheduled once or
+ * to run regularly over a time period at a predetermined interval (in hours).
+ */
 public class Task implements Cloneable, Serializable {
     private static final Logger logger = Logger.getLogger(Task.class);
 
@@ -42,7 +48,7 @@ public class Task implements Cloneable, Serializable {
      * @param title    is a string that contains task title.
      * @param start    set a specified time to start running task.
      * @param end      set a specified time to end running task.
-     * @param interval set period of time between repeating task.
+     * @param interval set a time period between repeating task.
      */
     public Task(String title, LocalDateTime start, LocalDateTime end, int interval) throws IllegalArgumentException, NullPointerException {
         if (title.isEmpty()) {

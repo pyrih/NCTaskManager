@@ -6,13 +6,17 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+/**
+ * The class allows you to save tasks and task lists on disk
+ * and transfer over the network.
+ */
 public class TaskIO {
 
     /**
-     * It writes list tasks to stream in binary format.
+     * Writes list tasks to stream in a binary format.
      *
-     * @param tasks - list of tasks.
-     * @param out   - output task stream.
+     * @param tasks list of tasks.
+     * @param out   output task stream.
      */
     public static void write(AbstractTaskList tasks, OutputStream out) {
         try (DataOutputStream stream = new DataOutputStream(new BufferedOutputStream(out))) {
@@ -44,10 +48,10 @@ public class TaskIO {
     }
 
     /**
-     * It reads tasks from the stream into a task list.
+     * Reads tasks from the stream into a task list.
      *
-     * @param tasks - list of tasks.
-     * @param in    - input task stream.
+     * @param tasks list of tasks.
+     * @param in input task stream.
      * @throws IOException
      */
     public static void read(AbstractTaskList tasks, InputStream in) throws IOException {
@@ -82,10 +86,10 @@ public class TaskIO {
     }
 
     /**
-     * It writes tasks from the list to a file.
+     * Writes tasks from the list to a file.
      *
-     * @param tasks - list of tasks.
-     * @param file  - target file.
+     * @param tasks list of tasks.
+     * @param file target file.
      * @throws FileNotFoundException
      */
     public static void writeBinary(AbstractTaskList tasks, File file) throws FileNotFoundException {
@@ -97,10 +101,10 @@ public class TaskIO {
     }
 
     /**
-     * It reads tasks from a file into a task list.
+     * Reads tasks from a file into a task list.
      *
-     * @param tasks - list of tasks.
-     * @param file  - source file.
+     * @param tasks list of tasks.
+     * @param file source file.
      */
     public static void readBinary(AbstractTaskList tasks, File file) {
         try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file))) {
@@ -111,10 +115,10 @@ public class TaskIO {
     }
 
     /**
-     * It writes tasks from a list to a stream in JSON format.
+     * Writes tasks from a list to a stream in JSON format.
      *
-     * @param tasks - list of tasks.
-     * @param out   - output stream.
+     * @param tasks list of tasks.
+     * @param out output stream.
      * @throws IOException
      */
     public static void write(AbstractTaskList tasks, Writer out) throws IOException {
@@ -126,10 +130,10 @@ public class TaskIO {
     }
 
     /**
-     * It reads tasks from a stream to a list.
+     * Reads tasks from a stream to a list.
      *
-     * @param tasks - list of tasks.
-     * @param in    - input stream.
+     * @param tasks list of tasks.
+     * @param in input stream.
      */
     public static void read(AbstractTaskList tasks, Reader in) {
         try (BufferedReader reader = new BufferedReader(in)) {
@@ -146,10 +150,10 @@ public class TaskIO {
     }
 
     /**
-     * It writes tasks to a JSON file.
+     * Writes tasks to a JSON file.
      *
-     * @param tasks - list of tasks.
-     * @param file  - target file.
+     * @param tasks list of tasks.
+     * @param file target file.
      */
     public static void writeText(AbstractTaskList tasks, File file) {
         String json = new Gson().toJson(tasks);
@@ -162,10 +166,10 @@ public class TaskIO {
     }
 
     /**
-     * It reads tasks from a JSON file.
+     * Reads tasks from a JSON file.
      *
-     * @param tasks - list of tasks.
-     * @param file  - source JSON file.
+     * @param tasks list of tasks.
+     * @param file source JSON file.
      */
     public static void readText(AbstractTaskList tasks, File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

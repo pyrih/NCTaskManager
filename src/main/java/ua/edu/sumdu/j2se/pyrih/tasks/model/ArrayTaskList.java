@@ -5,16 +5,29 @@ import org.apache.log4j.Logger;
 import java.util.*;
 import java.util.stream.Stream;
 
+/**
+ * A class is inherited from AbstractTaskList and implements those
+ * abstract operations that depend on the storage method using an array.
+ */
 public class ArrayTaskList extends AbstractTaskList {
     private static final Logger logger = Logger.getLogger(ArrayTaskList.class);
     private int size;
     private Task[] array;
 
+    /**
+     * Constructs an empty list with the specified initial capacity.
+     */
     public ArrayTaskList() {
         array = new Task[10];
         size = 0;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param task element to be appended to this list.
+     * @throws IllegalArgumentException
+     */
     @Override
     public void add(Task task) throws IllegalArgumentException {
         if (task == null) {
@@ -28,6 +41,13 @@ public class ArrayTaskList extends AbstractTaskList {
         size++;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param task element to be removed from this list, if present.
+     * @return boolean. true if such a task was listed.
+     * @throws IllegalArgumentException
+     */
     @Override
     public boolean remove(Task task) throws IllegalArgumentException {
         if (task == null) {
@@ -41,11 +61,23 @@ public class ArrayTaskList extends AbstractTaskList {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return the number of elements in this list.
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param index index of the task to return.
+     * @return the task at the specified position in this list.
+     * @throws IndexOutOfBoundsException
+     */
     @Override
     public Task getTask(int index) throws IndexOutOfBoundsException {
         if (array == null || index < 0 || index >= size) {
@@ -54,12 +86,84 @@ public class ArrayTaskList extends AbstractTaskList {
         return array[index];
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return stream of tasks.
+     */
     @Override
     public Stream<Task> getStream() {
         return Stream.of(this.toArray());
     }
 
-    public Task[] toArray() {
+    /**
+     * Compares the specified object with this task list for equality.
+     *
+     * @param o the object to be compared for equality with this task list.
+     * @return true if this list contained the specified element.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ArrayTaskList that = (ArrayTaskList) o;
+        return size == that.size &&
+                Arrays.equals(array, that.array);
+    }
+
+    /**
+     * Returns the hash code value for this list.
+     *
+     * @return the hash code value for this list.
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(size);
+        result = 31 * result + Arrays.hashCode(array);
+        return result;
+    }
+
+    /**
+     * Returns a copy of this instance.
+     *
+     * @return a clone of this instance.
+     * @throws CloneNotSupportedException {@inheritDoc}
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        ArrayTaskList arrayTaskList = (ArrayTaskList) super.clone();
+        arrayTaskList.array = Arrays.copyOf(array, size);
+        return arrayTaskList;
+    }
+
+    /**
+     * Returns a string representation of the array task list.
+     *
+     * @return a string.
+     */
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ArrayTaskList.class.getSimpleName() + "[", "]")
+                .add("size=" + size)
+                .add("array=" + Arrays.toString(array))
+                .toString();
+    }
+
+    /**
+     * Returns an iterator over elements of type Task.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<Task> iterator() {
+        return new ArrayListIterator(this);
+    }
+
+    private Task[] toArray() {
         return Arrays.copyOf(array, size);
     }
 
@@ -87,46 +191,6 @@ public class ArrayTaskList extends AbstractTaskList {
         } else {
             return target.equals(task);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ArrayTaskList that = (ArrayTaskList) o;
-        return size == that.size &&
-                Arrays.equals(array, that.array);
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        ArrayTaskList arrayTaskList = (ArrayTaskList) super.clone();
-        arrayTaskList.array = Arrays.copyOf(array, size);
-        return arrayTaskList;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(size);
-        result = 31 * result + Arrays.hashCode(array);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", ArrayTaskList.class.getSimpleName() + "[", "]")
-                .add("size=" + size)
-                .add("array=" + Arrays.toString(array))
-                .toString();
-    }
-
-    @Override
-    public Iterator<Task> iterator() {
-        return new ArrayListIterator(this);
     }
 
     private class ArrayListIterator implements Iterator<Task> {
