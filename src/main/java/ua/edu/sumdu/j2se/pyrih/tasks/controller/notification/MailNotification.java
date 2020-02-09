@@ -13,11 +13,17 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.SortedMap;
 
+/**
+ * Provides an implementation for sending notifications to a user by email.
+ */
 public class MailNotification implements Notification {
     private static final Logger logger = Logger.getLogger(MailNotification.class);
     private Session session;
     private Properties props;
 
+    /**
+     * Constructs class instance with a java mail session and loads properties.
+     */
     public MailNotification() {
         props = NotificationUtil.getConfigProperties();
         session = Session.getDefaultInstance(props,
@@ -29,6 +35,11 @@ public class MailNotification implements Notification {
                 });
     }
 
+    /**
+     * Sends email message to the user.
+     *
+     * @param calendar map contains an incoming tasks in selected period.
+     */
     @Override
     public void send(SortedMap<LocalDateTime, Set<Task>> calendar) {
         try {

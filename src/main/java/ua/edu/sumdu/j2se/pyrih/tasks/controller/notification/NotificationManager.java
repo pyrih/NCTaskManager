@@ -9,19 +9,28 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.SortedMap;
 
+/**
+ * Provides a notification manager that after a certain time period
+ * notifies the user about upcoming active tasks.
+ */
 public class NotificationManager extends Thread {
     private static final Logger logger = Logger.getLogger(NotificationManager.class);
     private final static long TIMER = 300000; // 5 MIN
     private AbstractTaskList list;
     private Notification notification;
 
+    /**
+     * Constructor.
+     *
+     * @param list task list.
+     */
     public NotificationManager(AbstractTaskList list) {
         this.list = list;
         notification = new MailNotification();
     }
 
     /**
-     *
+     * Sends a notification to the client.
      */
     @Override
     public void run() {

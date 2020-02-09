@@ -39,7 +39,7 @@ public class Tasks implements Serializable {
      *
      * @param tasks task collection.
      * @param start start time of a specified period.
-     * @param end end time of a specified period.
+     * @param end   end time of a specified period.
      * @return returns map where each date corresponds to a set of tasks to be completed at that time.
      */
     public static SortedMap<LocalDateTime, Set<Task>> calendar(Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {

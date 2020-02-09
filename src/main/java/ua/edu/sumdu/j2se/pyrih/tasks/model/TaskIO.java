@@ -51,7 +51,7 @@ public class TaskIO {
      * Reads tasks from the stream into a task list.
      *
      * @param tasks list of tasks.
-     * @param in input task stream.
+     * @param in    input task stream.
      * @throws IOException
      */
     public static void read(AbstractTaskList tasks, InputStream in) throws IOException {
@@ -89,7 +89,7 @@ public class TaskIO {
      * Writes tasks from the list to a file.
      *
      * @param tasks list of tasks.
-     * @param file target file.
+     * @param file  target file.
      * @throws FileNotFoundException
      */
     public static void writeBinary(AbstractTaskList tasks, File file) throws FileNotFoundException {
@@ -104,7 +104,7 @@ public class TaskIO {
      * Reads tasks from a file into a task list.
      *
      * @param tasks list of tasks.
-     * @param file source file.
+     * @param file  source file.
      */
     public static void readBinary(AbstractTaskList tasks, File file) {
         try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file))) {
@@ -118,7 +118,7 @@ public class TaskIO {
      * Writes tasks from a list to a stream in JSON format.
      *
      * @param tasks list of tasks.
-     * @param out output stream.
+     * @param out   output stream.
      * @throws IOException
      */
     public static void write(AbstractTaskList tasks, Writer out) throws IOException {
@@ -133,7 +133,7 @@ public class TaskIO {
      * Reads tasks from a stream to a list.
      *
      * @param tasks list of tasks.
-     * @param in input stream.
+     * @param in    input stream.
      */
     public static void read(AbstractTaskList tasks, Reader in) {
         try (BufferedReader reader = new BufferedReader(in)) {
@@ -153,7 +153,7 @@ public class TaskIO {
      * Writes tasks to a JSON file.
      *
      * @param tasks list of tasks.
-     * @param file target file.
+     * @param file  target file.
      */
     public static void writeText(AbstractTaskList tasks, File file) {
         String json = new Gson().toJson(tasks);
@@ -169,7 +169,7 @@ public class TaskIO {
      * Reads tasks from a JSON file.
      *
      * @param tasks list of tasks.
-     * @param file source JSON file.
+     * @param file  source JSON file.
      */
     public static void readText(AbstractTaskList tasks, File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

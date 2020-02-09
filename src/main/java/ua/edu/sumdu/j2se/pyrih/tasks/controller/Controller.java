@@ -96,7 +96,6 @@ public class Controller {
                 LocalDateTime end = view.parseDateTime();
                 view.print("Enter the interval in minutes: ");
                 int interval = view.getInterval();
-
                 if (!((start.isAfter(end) || start.isEqual(end)) &&
                         start.plusSeconds(interval).isAfter(end))) {
                     task = new Task(title, start, end, interval);
@@ -128,7 +127,6 @@ public class Controller {
         int index = view.selectTask(model) - 1;
         Task task = model.getTask(index);
         LocalDateTime start, end;
-
         while (true) {
             view.showEditMenu();
             String line = scanner.nextLine();
@@ -139,9 +137,8 @@ public class Controller {
                 view.print("Please enter a number: \n");
                 continue;
             }
-
             if (choice == 0) {
-                System.out.print("Do you want to return to previous menu? (Yes/No): ");
+                view.print("Do you want to return to previous menu? (Yes/No): ");
                 if (view.checkUserAnswer()) {
                     break;
                 }
@@ -174,10 +171,10 @@ public class Controller {
                                 task.setTime(start, end, interval);
                                 view.print("Start time was changed on: " + task.getStartTime() +
                                         "\nEnd time was changed on: " + task.getEndTime() +
-                                        "\nInterval  was changed on: " + task.getRepeatInterval());
+                                        "\nInterval was changed on: " + task.getRepeatInterval());
                                 break;
                             } else {
-                                view.print("Wrong time period. Please try again.\n");
+                                view.println("Wrong time period. Please try again.");
                             }
                         }
                         break;
@@ -195,7 +192,6 @@ public class Controller {
     public void removeTask() {
         int taskID = view.removeTask(model);
         Task task;
-
         if (taskID == 0) {
             view.print("The task list is empty! Add at least one task.");
         } else if (taskID == -1) {
