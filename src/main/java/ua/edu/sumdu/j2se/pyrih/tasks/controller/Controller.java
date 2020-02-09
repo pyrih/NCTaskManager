@@ -94,7 +94,6 @@ public class Controller {
                 LocalDateTime start = view.parseDateTime();
                 view.print("\nEnd date of the period: ");
                 LocalDateTime end = view.parseDateTime();
-                view.print("Enter the interval in minutes: ");
                 int interval = view.getInterval();
                 if (!((start.isAfter(end) || start.isEqual(end)) &&
                         start.plusSeconds(interval).isAfter(end))) {

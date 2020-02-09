@@ -282,14 +282,14 @@ public class ConsoleView implements View {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         StringBuilder builder = new StringBuilder();
         builder.append("Task title: " + task.getTitle());
-        if (task.isRepeated()) {
+        if (!task.isRepeated()) {
             builder.append(", time: " + task.getTime().format(formatter));
         } else {
             builder.append(", start time: " + task.getStartTime().format(formatter)
-                    + ", end time: " + task.getEndTime().format(formatter));
+                    + ", end time: " + task.getEndTime().format(formatter))
+                    .append(", interval: " + TimeConverter.convertSecondsToDay(task.getRepeatInterval()));
         }
-        builder.append(", interval: " + TimeConverter.convertSecondsToDay(task.getRepeatInterval())
-                + ", active: " + task.isActive() + ".");
+        builder.append(", active: " + task.isActive() + ".");
         println(builder.toString());
     }
 
@@ -353,7 +353,7 @@ public class ConsoleView implements View {
             } catch (NumberFormatException e) {
                 logger.error("Incorrect input value.");
             }
-            print("Please, enter correct value or [quite] to cancel: ");
+            print("Please, enter correct value or [quit] to cancel: ");
         }
     }
 }
