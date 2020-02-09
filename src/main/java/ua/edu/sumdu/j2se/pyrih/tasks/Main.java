@@ -19,6 +19,11 @@ public class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
     private AbstractTaskList list = TaskListFactory.createTaskList(ListTypes.types.ARRAY);
 
+    /**
+     * Main method. Execution of the program starts here.
+     *
+     * @param args the command line arguments.
+     */
     public static void main(String[] args) {
 
 /*        Properties properties = new Properties();
