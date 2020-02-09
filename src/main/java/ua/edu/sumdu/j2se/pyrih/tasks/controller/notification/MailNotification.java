@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.pyrih.tasks.controller.notification;
 
 import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.pyrih.tasks.model.Task;
+import ua.edu.sumdu.j2se.pyrih.tasks.util.NotificationUtil;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -10,8 +11,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Date;
+import java.util.Properties;
+import java.util.Set;
+import java.util.SortedMap;
 
 public class MailNotification implements Notification {
     private static final Logger logger = Logger.getLogger(MailNotification.class);
@@ -27,8 +30,6 @@ public class MailNotification implements Notification {
                     }
                 });
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-//            StringBuilder builder = new StringBuilder();
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(props.getProperty("set.from")));
@@ -36,39 +37,8 @@ public class MailNotification implements Notification {
                     InternetAddress.parse(props.getProperty("set.recipients")));
             message.setSubject("Task Manager. You have upcoming tasks!");
 
-/*            builder.append("Tasks for the next hour: ").append("\n").append("\n");
-
-            for (Map.Entry<LocalDateTime, Set<Task>> entry : calendar.entrySet()) {
-                String date = entry.getKey().format(formatter);
-                builder.append("# Date: ").append(date).append("\n");
-                for (Task task : entry.getValue()) {
-                    builder.append("Task: ").append(task.getTitle()).append("\n");
-                } builder.append("\n");
-            }*/
-
-            StringBuilder h = new StringBuilder();
-            h.append("<html><body>" +
-                    "<h2><b> Tasks for the next hour: </b></h2><br>" +
-                    "<table bordercolor=\"black\" border=\"1\" cellpadding=\"7\">");
-            h.append("<th> Date: </th>");
-            h.append("<th> Tasks: </th>");
-            for (Map.Entry<LocalDateTime, Set<Task>> entry : calendar.entrySet()) {
-                h.append("<tr>");
-                h.append("<td> " + entry.getKey().format(formatter) + " </td>");
-                h.append("<td> ");
-                for (Task task : entry.getValue()) {
-                    h.append(task.getTitle()).append("<br>");
-                }
-                h.append(" </td>");
-                h.append("</tr>");
-            }
-            h.append("</table></body></html>");
-            String html = h.toString();
-
-            // message.setText(builder.toString());
-
-            message.setContent(html, "text/html");
-
+            String htmlContent = NotificationUtil.getHTMLContent(calendar);
+            message.setContent(htmlContent, "text/html");
             message.setSentDate(new Date());
             Transport.send(message);
             logger.info("Tasks for the next hour is sent on email: " + props.getProperty("set.recipients"));
