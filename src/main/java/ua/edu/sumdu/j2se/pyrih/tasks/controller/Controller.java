@@ -9,12 +9,20 @@ import ua.edu.sumdu.j2se.pyrih.tasks.view.View;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+/**
+ * Responses for the relationship between model and view.
+ * Starts Notification manager in daemon thread.
+ */
 public class Controller {
     private static final Logger logger = Logger.getLogger(Controller.class);
     private AbstractTaskList model;
     private View view;
     private Scanner scanner;
 
+    /**
+     * @param list model (task list).
+     * @param view representation.
+     */
     public Controller(AbstractTaskList list, View view) {
         this.model = list;
         this.view = view;
@@ -38,7 +46,7 @@ public class Controller {
                 continue;
             }
             if (choice == 0) {
-                System.out.print("Do you want to exit? (Yes/No): ");
+                view.print("Do you want to exit? (Yes/No): ");
                 if (checkUserAnswer()) {
                     view.println("Program has been completed!");
                     break;
@@ -67,12 +75,15 @@ public class Controller {
     }
 
     /**
-     *
+     * Gets task list from model and represents into view.
      */
     public void getList() {
         view.showTaskList(model);
     }
 
+    /**
+     * Adds a task to the task list.
+     */
     public void addTask() {
         Task task;
 
@@ -111,6 +122,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Edits selected task from task list.
+     */
     public void editTask() {
         int index = view.selectTask(model) - 1;
         Task task = model.getTask(index);
@@ -176,6 +190,9 @@ public class Controller {
         view.println("The task has been successfully changed!");
     }
 
+    /**
+     * Removes selected task from task list.
+     */
     public void removeTask() {
         int taskID = view.removeTask(model);
         Task task;
@@ -184,13 +201,16 @@ public class Controller {
             view.print("The task list is empty! Add at least one task.");
         } else if (taskID == -1) {
             view.print("You did not confirm the deletion of the task.");
-        } else if (taskID > 0){
+        } else if (taskID > 0) {
             task = model.getTask(taskID - 1);
             model.remove(task);
             view.print("Task №: " + taskID + " was deleted from controller!");
         }
     }
 
+    /**
+     * Gets task list from model by selected period and represents into view.
+     */
     public void getCalendar() {
         view.getCalendar(model);
     }
