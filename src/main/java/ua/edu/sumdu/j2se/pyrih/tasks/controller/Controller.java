@@ -47,7 +47,7 @@ public class Controller {
             }
             if (choice == 0) {
                 view.print("Do you want to exit? (Yes/No): ");
-                if (checkUserAnswer()) {
+                if (view.checkUserAnswer()) {
                     view.println("Program has been completed!");
                     break;
                 }
@@ -143,7 +143,7 @@ public class Controller {
 
             if (choice == 0) {
                 System.out.print("Do you want to return to previous menu? (Yes/No): ");
-                if (checkUserAnswer()) {
+                if (view.checkUserAnswer()) {
                     break;
                 }
             } else {
@@ -213,18 +213,5 @@ public class Controller {
      */
     public void getCalendar() {
         view.getCalendar(model);
-    }
-
-    private boolean checkUserAnswer() {
-        return userAnswer().equalsIgnoreCase("yes");
-    }
-
-    private String userAnswer() {
-        String userAnswer = scanner.nextLine();
-        while (!userAnswer.equalsIgnoreCase("yes") & !userAnswer.equalsIgnoreCase("no")) {
-            System.out.print("You should select (Yes/No): ");
-            userAnswer = scanner.nextLine();
-        }
-        return userAnswer;
     }
 }
