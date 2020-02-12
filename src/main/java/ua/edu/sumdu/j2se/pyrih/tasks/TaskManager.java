@@ -20,6 +20,7 @@ import java.nio.file.Path;
  */
 public class TaskManager {
     private static final Logger logger = Logger.getLogger(TaskManager.class);
+    private final static String DATA_JSON_PATH = "data.json";
     private AbstractTaskList list;
 
     /**
@@ -44,24 +45,23 @@ public class TaskManager {
     }
 
     private void load(AbstractTaskList list) {
-        Path currentPath = FileSystems.getDefault()
-                .getPath("data.txt").toAbsolutePath();
+        Path currentPath = FileSystems.getDefault().getPath(DATA_JSON_PATH).toAbsolutePath();
         if (currentPath.toFile().exists()) {
             TaskIO.readText(list, new File(String.valueOf(currentPath.toFile())));
-            logger.info("List of tasks is loaded from file: data.txt");
+            logger.info("List of tasks is loaded from file: " + DATA_JSON_PATH + ".");
         } else {
-            logger.error("File: \"data.txt\" not found.");
+            logger.error("File: " + DATA_JSON_PATH + " not found.");
         }
     }
 
     private void save() {
-        Path currentPath = FileSystems.getDefault().getPath("data.txt").toAbsolutePath();
+        Path currentPath = FileSystems.getDefault().getPath(DATA_JSON_PATH).toAbsolutePath();
         try {
             Files.deleteIfExists(currentPath);
         } catch (IOException e) {
             logger.error("File not found: " + e);
         }
         TaskIO.writeText(list, new File(String.valueOf(currentPath.toFile())));
-        logger.info("List of tasks is saved to file: data.txt");
+        logger.info("List of tasks is saved to file: " + DATA_JSON_PATH + ".");
     }
 }
