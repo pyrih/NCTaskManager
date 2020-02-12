@@ -26,7 +26,7 @@ public class NotificationManager extends Thread {
      */
     public NotificationManager(AbstractTaskList list) {
         this.list = list;
-        notification = new MailNotification();
+        notification = MailNotification.getInstance();
     }
 
     /**

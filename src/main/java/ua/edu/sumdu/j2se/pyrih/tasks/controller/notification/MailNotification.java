@@ -18,13 +18,11 @@ import java.util.SortedMap;
  */
 public class MailNotification implements Notification {
     private static final Logger logger = Logger.getLogger(MailNotification.class);
+    private static final MailNotification MAIL_NOTIFICATION = new MailNotification();
     private Session session;
     private Properties props;
 
-    /**
-     * Constructs class instance with a java mail session and loads properties.
-     */
-    public MailNotification() {
+    private MailNotification() {
         props = NotificationUtil.getConfigProperties();
         session = Session.getDefaultInstance(props,
                 new Authenticator() {
@@ -33,6 +31,15 @@ public class MailNotification implements Notification {
                                 props.getProperty("mail.smtp.password"));
                     }
                 });
+    }
+
+    /**
+     * Singleton.
+     *
+     * @return MailNotification instance.
+     */
+    public static MailNotification getInstance() {
+        return MAIL_NOTIFICATION;
     }
 
     /**
