@@ -3,6 +3,7 @@ package ua.edu.sumdu.j2se.pyrih.tasks.controller.notification;
 import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.pyrih.tasks.model.Task;
 import ua.edu.sumdu.j2se.pyrih.tasks.util.NotificationUtil;
+import ua.edu.sumdu.j2se.pyrih.tasks.util.PropertyLoader;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -23,7 +24,7 @@ public class MailNotification implements Notification {
     private Properties props;
 
     private MailNotification() {
-        props = NotificationUtil.getConfigProperties();
+        props = PropertyLoader.getProperties("/mail.properties");
         session = Session.getDefaultInstance(props,
                 new Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
