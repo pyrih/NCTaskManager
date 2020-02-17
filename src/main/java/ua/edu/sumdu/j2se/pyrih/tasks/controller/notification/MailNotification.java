@@ -15,23 +15,23 @@ import java.util.Set;
 import java.util.SortedMap;
 
 /**
- * Provides an implementation for sending notifications to a user by email.
+ * Provides an implementation for sending notifications to a user by email via TLS protocol.
  */
 public class MailNotification implements Notification {
     private static final Logger logger = Logger.getLogger(MailNotification.class);
     private static final MailNotification MAIL_NOTIFICATION = new MailNotification();
     private Session session;
-    private Properties props;
+    private Properties properties;
 
     private MailNotification() {
-        props = PropertyLoader.getProperties("/mail.properties");
-        session = Session.getDefaultInstance(props,
-                new Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(props.getProperty("mail.smtp.username"),
-                                props.getProperty("mail.smtp.password"));
-                    }
-                });
+        properties = PropertyLoader.getProperties("/mail.properties");
+        session = Session.getInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(properties.getProperty("username"),
+                        properties.getProperty("password"));
+            }
+        });
+
     }
 
     /**
@@ -52,14 +52,14 @@ public class MailNotification implements Notification {
     public void send(SortedMap<LocalDateTime, Set<Task>> calendar) {
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(props.getProperty("set.from")));
+            message.setFrom(new InternetAddress(properties.getProperty("from")));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(props.getProperty("set.recipients")));
+                    InternetAddress.parse(properties.getProperty("recipients")));
             message.setSubject("Task Manager. You have upcoming tasks!");
             message.setContent(NotificationUtil.getHTMLContent(calendar), "text/html");
             message.setSentDate(new Date());
             Transport.send(message);
-            logger.info("Tasks for the next hour is sent on email: " + props.getProperty("set.recipients"));
+            logger.info("Tasks for the next hour is sent on email: " + properties.getProperty("recipients"));
         } catch (MessagingException e) {
             logger.error("Failed to send email.");
         }
