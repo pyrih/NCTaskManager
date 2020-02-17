@@ -1,9 +1,11 @@
 package ua.edu.sumdu.j2se.pyrih.tasks.controller;
 
 import org.apache.log4j.Logger;
+import ua.edu.sumdu.j2se.pyrih.tasks.TaskManager;
 import ua.edu.sumdu.j2se.pyrih.tasks.controller.notification.NotificationManager;
 import ua.edu.sumdu.j2se.pyrih.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.pyrih.tasks.model.Task;
+import ua.edu.sumdu.j2se.pyrih.tasks.model.TaskIO;
 import ua.edu.sumdu.j2se.pyrih.tasks.view.View;
 
 import java.time.LocalDateTime;
@@ -117,6 +119,7 @@ public class Controller {
             view.print("The task was successfully added to the list.");
             logger.info("The task: " + task.getTitle() + " was successfully added to the list.");
         }
+        TaskIO.saveToFileStorage(model, TaskManager.DATA_JSON_PATH);
     }
 
     /**
@@ -179,6 +182,7 @@ public class Controller {
                         break;
                     default:
                 }
+                TaskIO.saveToFileStorage(model, TaskManager.DATA_JSON_PATH);
             }
         }
         view.println("The task has been successfully changed!");
@@ -198,6 +202,7 @@ public class Controller {
         } else if (taskID > 0) {
             task = model.getTask(taskID - 1);
             model.remove(task);
+            TaskIO.saveToFileStorage(model, TaskManager.DATA_JSON_PATH);
             view.print("Task №: " + taskID + " was deleted from controller!");
             logger.info("Task №: " + taskID + " was deleted from controller!");
         }
