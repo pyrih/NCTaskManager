@@ -59,13 +59,16 @@ public class Controller {
                         getList();
                         break;
                     case 2:
-                        addTask();
+                        view.print("Are you sure you want to add a task? (Yes/No): ");
+                        if ((view.checkUserAnswer())) addTask();
                         break;
                     case 3:
-                        editTask();
+                        view.print("Are you sure you want to edit a task? (Yes/No): ");
+                        if ((view.checkUserAnswer())) editTask();
                         break;
                     case 4:
-                        removeTask();
+                        view.print("Are you sure you want to delete a task? (Yes/No): ");
+                        if ((view.checkUserAnswer())) removeTask();
                         break;
                     case 5:
                         getCalendar();
