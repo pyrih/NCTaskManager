@@ -1,6 +1,9 @@
 ## Welcome to NC TaskManager project
 
-**NC TaskManager** is as ...
+**NC TaskManager** is a console-based task management tool to organize everything from upcoming events to daily recurring tasks. The app provides task list and CRUD functionality, calendaring, reminders (integrated email notifications) and storing between runs support. You can also change activity status, edit due dates and filter task by dates. 
+The manager uses a simple JSON structure for storing tasks in a data.json file. That makes it easy to backup task list or move it to another computer.
+
+It will be a good help for effectively managing and performing your tasks from the command line. 
 
 ### Prerequisites:
 - Java 8
@@ -36,5 +39,5 @@ Use `build.cmd` script to create an executable JAR with Maven and then `run.cmd`
 For any problems, comments, or feedback please create an issue
 [here](https://github.com/pyrih/NCTaskManager/issues).
 
-### *Stay productive* :rocket:
+### *Stay productive at the command line* :rocket:
 
