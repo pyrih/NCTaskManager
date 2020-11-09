@@ -1,7 +1,7 @@
 ## Welcome to NC TaskManager project
 
-**NC TaskManager** is a console-based task management tool to organize everything from upcoming events to daily recurring tasks. The app provides task list and CRUD functionality, calendaring, reminders (integrated email notifications) and storing between runs support. You can also change activity status, edit due dates and filter task by dates. 
-The manager uses a simple JSON structure for storing tasks in a data.json file. That makes it easy to backup task list or move it to another computer.
+**NC TaskManager** is a console-based task management tool to organize everything from upcoming events to daily recurring tasks. The app provides CRUD functionality, calendaring, reminders (email notifications) and storing between runs support. It can also browse task list, change activity status, edit due dates and filter task by dates. 
+The manager uses a simple JSON structure for storing tasks in a data.json file. That makes it easy to back up task list or move it to another computer.
 
 It will be a good help for effectively managing and performing your tasks from the command line. 
 
